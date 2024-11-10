@@ -17,7 +17,7 @@ const Header = ({ genres }) => {
                     <option className="hover:bg-red-600 text-base active:bg-red-600" value="All">All</option>
 
                     {genres?.map(genre => (
-                        <option className="hover:bg-red-600 text-base active:bg-red-600" value={genre.id}>{genre.name}</option>
+                        <option key={genre.id} className="hover:bg-red-600 text-base active:bg-red-600" value={genre.id}>{genre.name}</option>
                     ))}
 
                 </select>
