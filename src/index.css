@@ -44,7 +44,7 @@ main:after {
 }
 
 .animate-scroll {
-    animation: scroll 5s linear infinite;
+    animation: scroll 60s linear infinite;
 }
 
 .animate-scroll:hover {
