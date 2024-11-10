@@ -39,12 +39,12 @@ main:after {
     }
 
     100% {
-        transform: translateX(calc(-350px * 20 - 0.5rem * 40));
+        transform: translateX(calc(-250px * 20 - 0.5rem * 40));
     }
 }
 
 .animate-scroll {
-    animation: scroll 60s linear infinite;
+    animation: scroll 5s linear infinite;
 }
 
 .animate-scroll:hover {
