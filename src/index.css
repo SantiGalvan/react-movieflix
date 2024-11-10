@@ -6,3 +6,45 @@ main {
     height: calc(100vh - 100px);
     background-color: #221f1f;
 }
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(calc(-350px * 20 - 0.5rem * 40));
+    }
+}
+
+.animate-scroll {
+    animation: scroll 25s linear infinite;
+}
+
+.animate-scroll:hover {
+    animation-play-state: paused;
+}
+
+.carousel {
+    position: relative;
+}
+
+.carousel:before,
+.carousel:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+}
+
+.carousel:before {
+    left: 0;
+    background: linear-gradient(to left, transparent, #221f1f);
+}
+
+.carousel:after {
+    right: 0;
+    background: linear-gradient(to right, transparent, #221f1f);
+}
