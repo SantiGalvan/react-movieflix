@@ -9,9 +9,9 @@ const CarouselCard = ({ movie }) => {
     }
 
     return (
-        <div className="m-2 w-[350px] h-[300px] flex-shrink-0 cursor-pointer">
+        <div className="m-2 w-[250px] h-[200px] hover:scale-[2] transition-all duration-250 ease-in-out flex-shrink-0 cursor-pointer">
 
-            <div className="rounded-3xl overflow-hidden h-full w-full hover:scale-105 transition-all duration-150 ease-in-out">
+            <div className="rounded-3xl overflow-hidden h-full w-full ">
                 <img className="h-full w-full" src={`${coverSrc()}`} alt={movie.title} />
             </div>
 
