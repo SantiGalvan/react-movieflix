@@ -1,11 +1,11 @@
 import CarouselCard from "./CarouselCard";
 
-const Carousel = ({ movies }) => {
+const Carousel = ({ movies, title }) => {
 
     return (
-        <section className="overflow-hidden w-full pt-8" id="carousel">
+        <section className="overflow-hidden w-full pt-4">
 
-            <h2 className="text-white text-center text-5xl pl-6 mb-6">I migliori di sempre</h2>
+            <h2 className="text-white text-center text-5xl mb-6">{title}</h2>
 
             <div className="carousel">
 
@@ -23,7 +23,7 @@ const Carousel = ({ movies }) => {
 
             </div>
 
-        </section>
+        </section >
     )
 }
 

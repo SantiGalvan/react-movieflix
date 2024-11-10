@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+    overflow: hidden;
+}
+
 main {
     height: calc(100vh - 100px);
     background-color: #221f1f;
+    overflow: auto;
 }
 
 @keyframes scroll {

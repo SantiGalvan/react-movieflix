@@ -9,6 +9,7 @@ const App = () => {
 
   const [ratedMovies, setRatedMovies] = useState();
   const [genresList, setGenresList] = useState();
+  const [trendigList, setTrendingList] = useState();
 
   const fetchRatedMovies = async () => {
     const res = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?${apiKey}&language=it-IT`);
@@ -20,12 +21,19 @@ const App = () => {
     const res = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?${apiKey}&language=it-IT`);
     const genres = res.data.genres;
     setGenresList(genres);
-    console.log(genres);
+  }
+
+  const fetchTrendingList = async () => {
+    const res = await axios.get(`https://api.themoviedb.org/3/trending/all/week?${apiKey}&language=it-IT`);
+    const trending = res.data.results;
+    setTrendingList(trending);
+    console.log(trending);
   }
 
   useEffect(() => {
     fetchRatedMovies();
     fetchGenresList();
+    fetchTrendingList();
   }, [])
 
   return (
@@ -34,7 +42,10 @@ const App = () => {
       <main>
 
         {/* Carosello dei migliori film */}
-        <Carousel movies={ratedMovies} />
+        <Carousel movies={ratedMovies} title="I migliori di sempre" />
+
+        {/* Carosello dei top */}
+        <Carousel movies={trendigList} title="Di tendenza" />
 
       </main>
     </>
