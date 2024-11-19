@@ -7,15 +7,9 @@ const apiKey = 'api_key=8bc2cb9796f692eef04d762a324418a9';
 
 const App = () => {
 
-  const [ratedMovies, setRatedMovies] = useState();
   const [genresList, setGenresList] = useState();
-  const [trendigList, setTrendingList] = useState();
-
-  const fetchRatedMovies = async () => {
-    const res = await axios.get(`https://api.themoviedb.org/3/movie/top_rated?${apiKey}&language=it-IT`);
-    const movies = res.data.results;
-    setRatedMovies(movies);
-  }
+  const [trendingTv, setTrendingTv] = useState();
+  const [trendigMovies, setTrendingMovies] = useState();
 
   const fetchGenresList = async () => {
     const res = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?${apiKey}&language=it-IT`);
@@ -23,31 +17,39 @@ const App = () => {
     setGenresList(genres);
   }
 
-  const fetchTrendingList = async () => {
-    const res = await axios.get(`https://api.themoviedb.org/3/trending/all/week?${apiKey}&language=it-IT`);
+  const fetchTrendingMovies = async () => {
+    const res = await axios.get(`https://api.themoviedb.org/3/trending/movie/week?${apiKey}&language=it-IT`);
     const trending = res.data.results;
-    setTrendingList(trending);
+    setTrendingMovies(trending);
+  }
+
+  const fetchTrendingTv = async () => {
+    const res = await axios.get(`https://api.themoviedb.org/3/trending/tv/week?${apiKey}&language=it-IT`);
+    const trending = res.data.results;
+    setTrendingTv(trending);
     console.log(trending);
   }
 
   useEffect(() => {
-    fetchRatedMovies();
     fetchGenresList();
-    fetchTrendingList();
+    fetchTrendingMovies();
+    fetchTrendingTv();
   }, [])
 
   return (
     <>
       <Header genres={genresList} />
+
       <main>
 
-        {/* Carosello dei migliori film */}
-        <Carousel movies={ratedMovies} title="I migliori di sempre" />
+        {/* Carosello dei top film della settimana */}
+        <Carousel movies={trendigMovies} title="Film popolari" />
 
-        {/* Carosello dei top */}
-        <Carousel movies={trendigList} title="Di tendenza" />
+        {/* Carosello delle top serie tv della settimana */}
+        <Carousel movies={trendingTv} title="Serie Tv popolari" />
 
       </main>
+
     </>
   )
 }
