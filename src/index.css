@@ -39,7 +39,7 @@ main:after {
     }
 
     100% {
-        transform: translateX(calc(-250px * 20 - 0.5rem * 40));
+        transform: translateX(calc(-200px * 20 - 0.5rem * 40));
     }
 }
 
