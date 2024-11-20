@@ -7,20 +7,24 @@ const apiKey = import.meta.env.VITE_API_KEY;
 
 const Home = () => {
 
-    const [trendingTv, setTrendingTv] = useState();
     const [trendigMovies, setTrendingMovies] = useState();
+    const [trendingTv, setTrendingTv] = useState();
+    const [weekMovies, setWeekMovies] = useState(false);
+    const [weekTv, setWeekTv] = useState(false);
 
     const { loader, setLoader } = useLoader();
 
-    const fetchTrendingMovies = async () => {
-        const res = await axios.get(`https://api.themoviedb.org/3/trending/movie/week?${apiKey}&language=it-IT`);
+    const fetchTrendingMovies = async bool => {
+        const time = bool ? 'week' : 'day';
+        const res = await axios.get(`https://api.themoviedb.org/3/trending/movie/${time}?${apiKey}&language=it-IT`);
         const trending = res.data.results;
         setTrendingMovies(trending);
         setLoader(true);
     }
 
-    const fetchTrendingTv = async () => {
-        const res = await axios.get(`https://api.themoviedb.org/3/trending/tv/week?${apiKey}&language=it-IT`);
+    const fetchTrendingTv = async bool => {
+        const time = bool ? 'week' : 'day';
+        const res = await axios.get(`https://api.themoviedb.org/3/trending/tv/${time}?${apiKey}&language=it-IT`);
         const trending = res.data.results;
         setTrendingTv(trending);
         setLoader(true);
@@ -28,14 +32,24 @@ const Home = () => {
 
     const timeout = () => {
         setTimeout(() => {
-            fetchTrendingMovies();
-            fetchTrendingTv();
+            fetchTrendingMovies(weekMovies);
+            fetchTrendingTv(weekTv);
         }, 500);
     }
 
     useEffect(() => {
         timeout();
     }, [])
+
+    // UseEffect per i Film
+    useEffect(() => {
+        fetchTrendingMovies(weekMovies)
+    }, [weekMovies]);
+
+    // UseEffect per le Serie TV
+    useEffect(() => {
+        fetchTrendingTv(weekTv)
+    }, [weekTv]);
 
     return (
         <>
@@ -44,10 +58,22 @@ const Home = () => {
                 <main>
 
                     {/* Carosello dei top film della settimana */}
-                    <Carousel movies={trendigMovies} title="Film popolari" />
+                    <Carousel
+                        type={'movies'}
+                        movies={trendigMovies}
+                        title="Film popolari"
+                        toogleChange={() => setWeekMovies(!weekMovies)}
+                        toogleChecked={weekMovies}
+                    />
 
                     {/* Carosello delle top serie tv della settimana */}
-                    <Carousel movies={trendingTv} title="Serie Tv popolari" />
+                    <Carousel
+                        type={'tv'}
+                        movies={trendingTv}
+                        title="Serie Tv popolari"
+                        toogleChange={() => setWeekTv(!weekTv)}
+                        toogleChecked={weekTv}
+                    />
 
                 </main>
             }

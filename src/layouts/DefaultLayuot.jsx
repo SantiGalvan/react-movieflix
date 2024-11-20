@@ -13,8 +13,6 @@ const DefaultLayout = () => {
 
     const { loader } = useLoader();
 
-    console.log(loader);
-
     const fetchGenresList = async () => {
         const res = await axios.get(`https://api.themoviedb.org/3/genre/movie/list?${apiKey}&language=it-IT`);
         const genres = res.data.genres;

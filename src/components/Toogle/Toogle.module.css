@@ -1,0 +1,82 @@
+/*? Toogle */
+.toggleContainer {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+
+.toggleLabel {
+    width: 150px;
+    height: 40px;
+    position: relative;
+    display: block;
+    background: #ebebeb;
+    border-radius: 200px;
+    box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
+        inset 0px -5px 15px rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.toggleLabel:after {
+    content: "";
+    width: 50px;
+    height: 34px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    background: linear-gradient(180deg, #ffcc89, #d8860b);
+    border-radius: 180px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+}
+
+.toggle {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.toggle:checked+.toggleLabel {
+    background: #242424;
+}
+
+.toggle:checked+.toggleLabel:after {
+    left: 147px;
+    width: 100px;
+    transform: translateX(-100%);
+    background: linear-gradient(180deg, #141237, #0955a1);
+}
+
+.toggleLabel:active:after {
+    width: 30px;
+}
+
+.toggleLabel span {
+    position: absolute;
+    top: 8px;
+    z-index: 1;
+}
+
+.toggleLabel .today {
+    left: 26px;
+    fill: #fff;
+    transform: translateX(-50%);
+    transition: 0.3s;
+}
+
+.toggleLabel .week {
+    left: 97px;
+    transform: translateX(-50%);
+    fill: #7e7e7e;
+    transition: 0.3s;
+}
+
+.toggle:checked+.toggleLabel .today {
+    fill: #7e7e7e;
+}
+
+.toggle:checked+.toggleLabel .week {
+    fill: #fff;
+}
