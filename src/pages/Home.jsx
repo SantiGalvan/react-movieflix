@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import axios from "axios";
 import { useLoader } from "../contexts/LoaderContext";
@@ -19,7 +19,6 @@ const Home = () => {
         const res = await axios.get(`https://api.themoviedb.org/3/trending/movie/${time}?${apiKey}&language=it-IT`);
         const trending = res.data.results;
         setTrendingMovies(trending);
-        setLoader(true);
     }
 
     const fetchTrendingTv = async bool => {
@@ -27,13 +26,11 @@ const Home = () => {
         const res = await axios.get(`https://api.themoviedb.org/3/trending/tv/${time}?${apiKey}&language=it-IT`);
         const trending = res.data.results;
         setTrendingTv(trending);
-        setLoader(true);
     }
 
     const timeout = () => {
         setTimeout(() => {
-            fetchTrendingMovies(weekMovies);
-            fetchTrendingTv(weekTv);
+            setLoader(true);
         }, 500);
     }
 
